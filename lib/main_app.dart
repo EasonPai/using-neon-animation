@@ -31,17 +31,12 @@ class MainApp extends PolymerElement
 
   @reflectable
   void onTileClick([_, detail]) {
-    print(" onItemClick , detail = ${detail}");
-
-    _card.color = detail["data"]["color"];
     _card.set("color", detail["data"]["color"]);
-
     _pages.selected = 1;
   }
 
   @reflectable
-  void onFullClose([_, detail]) {
-    print(" onFullClose , detail = ${detail}");
+  void onCardClosed([_, detail]) {
     _pages.selected = 0;
   }
 

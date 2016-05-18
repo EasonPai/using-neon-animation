@@ -63,9 +63,9 @@ class CardView extends PolymerElement
 
   @reflectable
   String computeCardClass(color) {
-    print("computeCardClass > $color");
     String cls = 'card';
     if (color!=null) {
+      // TODO: workaround to use material colors provided by mdl/dart
       cls += ' mdl-color--' + color + '-300';
     }
     return cls;
@@ -73,13 +73,12 @@ class CardView extends PolymerElement
 
   @reflectable
   String computeFixedBackgroundClass(color) {
-
-    print("computeFixedBackgroundClass > $color");
     String cls = 'fixed';
     if (color!=null) {
+      // TODO: workaround to use material colors provided by mdl/dart
       cls += ' mdl-color--' + color + '-100';
     }
-        return cls;
+    return cls;
   }
 
   @reflectable

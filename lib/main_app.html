@@ -2,7 +2,6 @@
     <style>
         :host {
             overflow: hidden;
-            /*@apply(--layout-fullbleed);*/
         }
         neon-animated-pages {
             height: 100%;
@@ -12,7 +11,7 @@
 
         <neon-animated-pages id="pages" selected="0">
             <grid-view id="grid" on-tile-click="onTileClick"></grid-view>
-            <card-view id="card" on-click="onFullClose"> </card-view>
+            <card-view id="card" on-click="onCardClosed"> </card-view>
         </neon-animated-pages>
     </template>
 </dom-module>

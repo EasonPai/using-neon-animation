@@ -5,8 +5,8 @@ import 'package:polymer/polymer.dart';
 import 'package:web_components/web_components.dart' show HtmlImport;
 
 import 'package:polymer_elements/iron_flex_layout.dart';
+import 'package:polymer_elements/color.dart';
 import 'package:polymer_elements/typography.dart';
-import 'package:polymer_elements/demo_pages_shared_styles.dart';
 import 'package:polymer_elements/neon_animatable_behavior.dart';
 import 'package:polymer_elements/neon_shared_element_animatable_behavior.dart';
 import 'package:polymer_elements/neon_animation/animations/ripple_animation.dart';
@@ -57,11 +57,12 @@ class GridView extends PolymerElement
 
   @reflectable
   String computeTileClass(color) {
+    // TODO: workaround to use material colors provided by mdl/dart
     return 'tile mdl-color--' + color + '-300';
   }
 
 	@reflectable
-	void itemSelected(Event event, [_]) {
+	void onTapped(Event event, [_]) {
 
 		/// Use `Polymer.NeonSharedElementAnimatableBehavior` to implement elements containing shared element
 		/// animations.
@@ -70,7 +71,7 @@ class GridView extends PolymerElement
       'ripple': event.currentTarget
 		};
 
-    // workaround to update x,y value to animationConfig
+    // update gesture value
     animationConfig = {
       'exit': [{
         'name': 'ripple-animation',
@@ -78,7 +79,8 @@ class GridView extends PolymerElement
         'fromPage': this,
         'gesture': {
           "x": _["x"],
-          "y": _["y"]}
+          "y": _["y"]
+        }
       }, {
         'name': 'hero-animation',
         'id': 'hero',
@@ -88,7 +90,7 @@ class GridView extends PolymerElement
 
 		fire("tile-click", detail:{
       "tile": event.currentTarget,
-      "data": data[event.currentTarget.id]
+      "data": data[int.parse(event.currentTarget.id)]
     });
 	}
 
