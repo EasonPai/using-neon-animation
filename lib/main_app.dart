@@ -8,22 +8,13 @@ import 'package:polymer/polymer.dart';
 import 'package:web_components/web_components.dart' show HtmlImport;
 import 'package:polymer_elements/neon_animated_pages.dart';
 import 'package:polymer_elements/iron_flex_layout.dart';
-import 'package:polymer_elements/iron_flex_layout/classes/iron_flex_layout.dart';
-import 'package:polymer_elements/neon_animation/animations/fade_in_animation.dart';
-import 'package:polymer_elements/neon_animation/animations/fade_out_animation.dart';
-import 'package:polymer_elements/neon_animation/animations/hero_animation.dart';
-import 'package:polymer_elements/neon_animation/animations/scale_down_animation.dart';
-import 'package:polymer_elements/neon_animatable_behavior.dart';
-import 'package:polymer_elements/neon_animation_runner_behavior.dart';
 import 'package:using_neon_animation/grid_view.dart';
 import 'package:using_neon_animation/card_view.dart';
 
 @PolymerRegister('main-app')
 class MainApp extends PolymerElement
     with
-        PolymerBase,
-        NeonAnimatableBehavior,
-        NeonAnimationRunnerBehavior {
+        PolymerBase{
   MainApp.created() : super.created() {
   }
 
