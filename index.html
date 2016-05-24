@@ -11299,55 +11299,86 @@ Configuration:
 
 
 
+<dom-module id="shared-styles">
+    <template>
+        <style>
+            .red-100 {
+                background: var(--google-red-100);
+            }
+            .yellow-100 {
+                background: var(--google-yellow-100);
+            }
+            .blue-100 {
+                background: var(--google-blue-100);
+            }
+            .green-100 {
+                background: var(--google-green-100);
+            }
+            .red-300 {
+                background: var(--google-red-300);
+            }
+            .yellow-300 {
+                background: var(--google-yellow-300);
+            }
+            .blue-300 {
+                background: var(--google-blue-300);
+            }
+            .green-300 {
+                background: var(--google-green-300);
+            }
+        </style>
+    </template>
+</dom-module>
 <dom-module id="grid-view">
-    <style>
-        :host {
-            display: inline-flex;
-            background: #000;
-        }
-        .tile {
-            display: inline-block;
-            float: left;
-            vertical-align: top;
-            width: calc(100% / 6);
-            height: calc(100% / 3);
+    <template>
+        <style include="shared-styles"></style>
+        <style>
+            :host {
+                display: flex;
+                background: #000;
+            }
+            .tile {
+                display: inline-block;
+                float: left;
+                vertical-align: top;
+                width: calc(100% / 6);
+                height: calc(100% / 3);
             @apply(--paper-font-title);
             @apply(--layout-vertical);
             @apply(--layout-center-center);
-        }
-        .tile:nth-of-type(1) {
-            width: calc(100% / 3);
-            height: calc(100% / 3 * 2);
-        }
-        .tile:nth-of-type(4) {
-            width: calc(100% / 3);
-        }
-        .tile:nth-of-type(5) {
-            width: calc(100% / 3);
-            height: calc(100% / 3 * 2);
-        }
-        .tile:nth-of-type(8) {
-            width: calc(100% / 3);
-            height: calc(100% / 3);
-        }
-        .tile:nth-of-type(9) {
-            position: absolute;
-            top: calc(100% / 3 * 2);
-            left: 0;
-            width: calc(100% / 6);
-            height: calc(100% / 3);
-        }
-        .tile:nth-of-type(10) {
-            position: absolute;
-            top: calc(100% / 3 * 2);
-            left: calc(100% / 6);
-            width: calc(100% / 6);
-            height: calc(100% / 3);
-        }
+            }
+            .tile:nth-of-type(1) {
+                width: calc(100% / 3);
+                height: calc(100% / 3 * 2);
+            }
+            .tile:nth-of-type(4) {
+                width: calc(100% / 3);
+            }
+            .tile:nth-of-type(5) {
+                width: calc(100% / 3);
+                height: calc(100% / 3 * 2);
+            }
+            .tile:nth-of-type(8) {
+                width: calc(100% / 3);
+                height: calc(100% / 3);
+            }
+            .tile:nth-of-type(9) {
+                position: absolute;
+                top: calc(100% / 3 * 2);
+                left: 0;
+                width: calc(100% / 6);
+                height: calc(100% / 3);
+            }
+            .tile:nth-of-type(10) {
+                position: absolute;
+                top: calc(100% / 3 * 2);
+                left: calc(100% / 6);
+                width: calc(100% / 6);
+                height: calc(100% / 3);
+            }
 
 
-    </style>
-    <template>
+        </style>
         <div class="layout flex">
             <template is="dom-repeat" items="[[data]]" as="item">
                 <div id="[[index]]" class$="[[computeTileClass(item.color)]]" on-tap="onTapped">
@@ -11461,46 +11492,45 @@ Configuration:
 
 
 
+
 <dom-module id="card-view">
-    <style>
-        :host {
-            display: block;
-        }
-
-        .fixed {
-            position: fixed;
-            top: 0;
-            left: 0;
-            height: 100vh;
-            width: 100vw;
-        }
-
-        .card {
-            position: relative;
-            margin: 100px 100px 0;
-            height: 700px;
-        }
-
-    </style>
-
     <template>
+        <style include="shared-styles"></style>
+        <style>
+            :host {
+            }
 
+            .fixed {
+                position: fixed;
+                top: 0;
+                left: 0;
+                height: 100vh;
+                width: 100vw;
+            }
+
+            .card {
+                position: relative;
+                margin: 100px 100px 0;
+                height: 700px;
+            }
+
+        </style>
         <div id="fixed" class$="[[computeFixedBackgroundClass(color)]]"></div>
         <div id="card" class$="[[computeCardClass(color)]]"></div>
 
     </template>
 
     </dom-module><dom-module id="main-app">
-    <style>
-        :host {
-            overflow: hidden;
-        }
-        neon-animated-pages {
-            height: 100%;
-        }
-    </style>
     <template>
+        <style>
+            :host {
+                overflow: hidden;
+            }
+            neon-animated-pages {
+                height: 100%;
+            }
 
+        </style>
         <neon-animated-pages id="pages" selected="0">
             <grid-view id="grid" on-tile-click="onTileClick"></grid-view>
             <card-view id="card" on-click="onCardClosed"> </card-view>
