@@ -5331,8 +5331,8 @@ bw:{
 "^":"eG;b0:a0%,a$",
 cf:[function(a){this.saY(a,P.o(["entry",[P.o(["name","ripple-animation","id","ripple","toPage",a]),P.o(["name","hero-animation","id","hero","toPage",a,"timing",P.o(["delay",150])])],"exit",[P.o(["name","fade-out-animation","node",this.ga2(a).h(0,"fixed")]),P.o(["name","transform-animation","transformFrom","none","transformTo","translate(0px,-200vh) scale(0.9,1)","node",this.ga2(a).h(0,"card")])]]))
 this.sbq(a,P.o(["hero",this.ga2(a).h(0,"card"),"ripple",this.ga2(a).h(0,"fixed")]))},"$0","gbf",0,0,1],
-er:[function(a,b){return b!=null?"card"+(C.j.ad(" mdl-color--",b)+"-300"):"card"},"$1","gds",2,0,6,8],
-es:[function(a,b){return b!=null?"fixed"+(C.j.ad(" mdl-color--",b)+"-100"):"fixed"},"$1","gdt",2,0,6,8],
+er:[function(a,b){return b!=null?"card"+(C.j.ad(" ",b)+"-300"):"card"},"$1","gds",2,0,6,8],
+es:[function(a,b){return b!=null?"fixed"+(C.j.ad(" ",b)+"-100"):"fixed"},"$1","gdt",2,0,6,8],
 cb:[function(a,b,c){P.c6("onClearButtonClick")
 this.dI(a,"close")},function(a){return this.cb(a,null,null)},"eA",function(a,b){return this.cb(a,b,null)},"eB","$2","$0","$1","ge4",0,4,7,0,0,1,44],
 static:{hG:function(a){a.a0=""
@@ -5348,7 +5348,7 @@ eG:{
 bA:{
 "^":"eH;M:a0%,a$",
 cf:[function(a){this.saY(a,P.o(["exit",[P.o(["name","ripple-animation","id","ripple","fromPage",a]),P.o(["name","hero-animation","id","hero","fromPage",a])]]))},"$0","gbf",0,0,1],
-eu:[function(a,b){return C.j.ad("tile mdl-color--",b)+"-300"},"$1","gdu",2,0,6,8],
+eu:[function(a,b){return C.j.ad("tile ",b)+"-300"},"$1","gdu",2,0,6,8],
 e6:[function(a,b,c){var z,y
 z=J.y(b)
 this.sbq(a,P.o(["hero",z.gah(b),"ripple",z.gah(b)]))
@@ -5540,8 +5540,8 @@ C.as=new U.ag("polymer.lib.polymer_micro.dart.dom.html.HtmlElement with polymer.
 C.at=new U.ag("polymer.lib.polymer_micro.dart.dom.html.HtmlElement with polymer.src.common.polymer_js_proxy.PolymerMixin, polymer_interop.src.js_element_proxy.PolymerBase")
 C.av=new U.ag("using_neon_animation.lib.grid_view.polymer.lib.polymer_micro.PolymerElement with polymer_interop.src.js_element_proxy.PolymerBase")
 C.au=new U.ag("using_neon_animation.lib.card_view.polymer.lib.polymer_micro.PolymerElement with polymer_interop.src.js_element_proxy.PolymerBase")
-C.ax=new U.ag("using_neon_animation.lib.grid_view.polymer.lib.polymer_micro.PolymerElement with polymer_interop.src.js_element_proxy.PolymerBase, polymer_elements.lib.src.neon_animation.neon_animatable_behavior.NeonAnimatableBehavior, polymer_elements.lib.src.neon_animation.neon_shared_element_animatable_behavior.NeonSharedElementAnimatableBehavior")
 C.aw=new U.ag("using_neon_animation.lib.card_view.polymer.lib.polymer_micro.PolymerElement with polymer_interop.src.js_element_proxy.PolymerBase, polymer_elements.lib.src.neon_animation.neon_animatable_behavior.NeonAnimatableBehavior, polymer_elements.lib.src.neon_animation.neon_shared_element_animatable_behavior.NeonSharedElementAnimatableBehavior")
+C.ax=new U.ag("using_neon_animation.lib.grid_view.polymer.lib.polymer_micro.PolymerElement with polymer_interop.src.js_element_proxy.PolymerBase, polymer_elements.lib.src.neon_animation.neon_animatable_behavior.NeonAnimatableBehavior, polymer_elements.lib.src.neon_animation.neon_shared_element_animatable_behavior.NeonSharedElementAnimatableBehavior")
 C.ay=new U.ag("using_neon_animation.lib.card_view.polymer.lib.polymer_micro.PolymerElement with polymer_interop.src.js_element_proxy.PolymerBase, polymer_elements.lib.src.neon_animation.neon_animatable_behavior.NeonAnimatableBehavior")
 C.az=new U.ag("using_neon_animation.lib.grid_view.polymer.lib.polymer_micro.PolymerElement with polymer_interop.src.js_element_proxy.PolymerBase, polymer_elements.lib.src.neon_animation.neon_animatable_behavior.NeonAnimatableBehavior")
 C.aA=new U.ag("using_neon_animation.lib.main_app.polymer.lib.polymer_micro.PolymerElement with polymer_interop.src.js_element_proxy.PolymerBase")
@@ -5596,6 +5596,35 @@ C.aI=function(getTagFallback) {
     hooks.getTag = getTagFallback;
   };
 }
+C.aK=function(hooks) {
+  var userAgent = typeof navigator == "object" ? navigator.userAgent : "";
+  if (userAgent.indexOf("Trident/") == -1) return hooks;
+  var getTag = hooks.getTag;
+  var quickMap = {
+    "BeforeUnloadEvent": "Event",
+    "DataTransfer": "Clipboard",
+    "HTMLDDElement": "HTMLElement",
+    "HTMLDTElement": "HTMLElement",
+    "HTMLPhraseElement": "HTMLElement",
+    "Position": "Geoposition"
+  };
+  function getTagIE(o) {
+    var tag = getTag(o);
+    var newTag = quickMap[tag];
+    if (newTag) return newTag;
+    if (tag == "Object") {
+      if (window.DataView && (o instanceof window.DataView)) return "DataView";
+    }
+    return tag;
+  }
+  function prototypeForTagIE(tag) {
+    var constructor = window[tag];
+    if (constructor == null) return null;
+    return constructor.prototype;
+  }
+  hooks.getTag = getTagIE;
+  hooks.prototypeForTag = prototypeForTagIE;
+}
 C.aJ=function() {
   function typeNameInChrome(o) {
     var constructor = o.constructor;
@@ -5631,35 +5660,6 @@ C.aJ=function() {
     getUnknownTag: isBrowser ? getUnknownTagGenericBrowser : getUnknownTag,
     prototypeForTag: prototypeForTag,
     discriminator: discriminator };
-}
-C.aK=function(hooks) {
-  var userAgent = typeof navigator == "object" ? navigator.userAgent : "";
-  if (userAgent.indexOf("Trident/") == -1) return hooks;
-  var getTag = hooks.getTag;
-  var quickMap = {
-    "BeforeUnloadEvent": "Event",
-    "DataTransfer": "Clipboard",
-    "HTMLDDElement": "HTMLElement",
-    "HTMLDTElement": "HTMLElement",
-    "HTMLPhraseElement": "HTMLElement",
-    "Position": "Geoposition"
-  };
-  function getTagIE(o) {
-    var tag = getTag(o);
-    var newTag = quickMap[tag];
-    if (newTag) return newTag;
-    if (tag == "Object") {
-      if (window.DataView && (o instanceof window.DataView)) return "DataView";
-    }
-    return tag;
-  }
-  function prototypeForTagIE(tag) {
-    var constructor = window[tag];
-    if (constructor == null) return null;
-    return constructor.prototype;
-  }
-  hooks.getTag = getTagIE;
-  hooks.prototypeForTag = prototypeForTagIE;
 }
 C.aL=function(hooks) {
   var getTag = hooks.getTag;
@@ -5723,9 +5723,9 @@ C.E=H.c(I.n([C.bk]),[P.a])
 C.b3=H.c(I.n([2,3,4,7,11,12,13,14,15,16]),[P.j])
 C.aa=new V.bd()
 C.l=H.c(I.n([C.aa]),[P.a])
-C.h=I.n([])
 C.b=H.c(I.n([]),[P.j])
 C.d=H.c(I.n([]),[P.a])
+C.h=I.n([])
 C.b4=I.n(["Polymer","NeonAnimatableBehavior"])
 C.a6=new U.dn(C.b4)
 C.b7=H.c(I.n([C.a6]),[P.a])
