@@ -57,8 +57,8 @@ class GridView extends PolymerElement
 
   @reflectable
   String computeTileClass(color) {
-    // TODO: workaround to use material colors provided by mdl/dart
-    return 'tile mdl-color--' + color + '-300';
+//    return 'tile mdl-color--' + color + '-300'; // TODO: this is a workaround that uses material colors provided by css of mdl/dart
+    return 'tile ' + color + '-300';
   }
 
 	@reflectable

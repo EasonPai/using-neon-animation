@@ -66,7 +66,7 @@ class CardView extends PolymerElement
     String cls = 'card';
     if (color!=null) {
       // TODO: workaround to use material colors provided by mdl/dart
-      cls += ' mdl-color--' + color + '-300';
+      cls += ' ' + color + '-300';
     }
     return cls;
   }
@@ -76,7 +76,7 @@ class CardView extends PolymerElement
     String cls = 'fixed';
     if (color!=null) {
       // TODO: workaround to use material colors provided by mdl/dart
-      cls += ' mdl-color--' + color + '-100';
+      cls += ' ' + color + '-100';
     }
     return cls;
   }
