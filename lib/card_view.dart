@@ -6,7 +6,8 @@ library using_neon_animation.lib.card_view;
 
 import 'package:polymer/polymer.dart';
 import 'package:web_components/web_components.dart' show HtmlImport;
-
+import 'package:polymer_elements/color.dart';
+import 'package:polymer_elements/typography.dart';
 import 'package:polymer_elements/neon_animatable_behavior.dart';
 import 'package:polymer_elements/neon_shared_element_animatable_behavior.dart';
 import 'package:polymer_elements/neon_animation/animations/fade_out_animation.dart';
@@ -65,8 +66,7 @@ class CardView extends PolymerElement
   String computeCardClass(color) {
     String cls = 'card';
     if (color!=null) {
-      // TODO: workaround to use material colors provided by mdl/dart
-      cls += ' ' + color + '-300';
+      cls = '$cls $color-300';
     }
     return cls;
   }
@@ -75,15 +75,13 @@ class CardView extends PolymerElement
   String computeFixedBackgroundClass(color) {
     String cls = 'fixed';
     if (color!=null) {
-      // TODO: workaround to use material colors provided by mdl/dart
-      cls += ' ' + color + '-100';
+      cls = '$cls $color-100';
     }
     return cls;
   }
 
   @reflectable
   void onClearButtonClick([_, __]) {
-    print("onClearButtonClick");
     fire("close");
   }
 
