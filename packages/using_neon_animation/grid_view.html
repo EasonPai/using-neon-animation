@@ -1,0 +1,58 @@
+<dom-module id="grid-view">
+    <style>
+        :host {
+            display: block;
+            background: #000;
+        }
+        .tile {
+            display: inline-block;
+            float: left;
+            vertical-align: top;
+            width: calc(100% / 6);
+            height: calc(100% / 3);
+            @apply(--paper-font-title);
+            @apply(--layout-vertical);
+            @apply(--layout-center-center);
+        }
+        .tile:nth-of-type(1) {
+            width: calc(100% / 3);
+            height: calc(100% / 3 * 2);
+        }
+        .tile:nth-of-type(4) {
+            width: calc(100% / 3);
+        }
+        .tile:nth-of-type(5) {
+            width: calc(100% / 3);
+            height: calc(100% / 3 * 2);
+        }
+        .tile:nth-of-type(8) {
+            width: calc(100% / 3);
+            height: calc(100% / 3);
+        }
+        .tile:nth-of-type(9) {
+            position: absolute;
+            top: calc(100% / 3 * 2);
+            left: 0;
+            width: calc(100% / 6);
+            height: calc(100% / 3);
+        }
+        .tile:nth-of-type(10) {
+            position: absolute;
+            top: calc(100% / 3 * 2);
+            left: calc(100% / 6);;
+            width: calc(100% / 6);
+            height: calc(100% / 3);
+        }
+
+
+    </style>
+    <template>
+        <div class="layout flex">
+            <template is="dom-repeat" items="[[data]]"  as="item">
+                <div id="[[index]]" class$="[[computeTileClass(item.color)]]" on-tap="onTapped">
+                    <span>[[item.value]]</span>
+                </div>
+            </template>
+        </div>
+    </template>
+</dom-module>
