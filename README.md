@@ -1,4 +1,4 @@
-# using_neon_animation 
+# using neon animation 
 
 ####[Demo](http://easonpai.github.io/using-neon-animation/)
 
