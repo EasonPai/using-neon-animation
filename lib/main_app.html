@@ -1,17 +1,13 @@
 <dom-module id="main-app">
     <template>
         <style>
-            :host {
-                overflow: hidden;
-            }
-            neon-animated-pages {
-                height: 100%;
-            }
-
         </style>
-        <neon-animated-pages id="pages" selected="0">
-            <grid-view id="grid" on-tile-click="onTileClick"></grid-view>
-            <card-view id="card" on-click="onCardClosed"> </card-view>
-        </neon-animated-pages>
+
+        <span id="demos">
+            <grid-index hidden$="[[computeType(0)]]"></grid-index>
+            <tiles-index hidden$="[[computeType(1)]]"></tiles-index>
+        </span>
+
+
     </template>
 </dom-module>
