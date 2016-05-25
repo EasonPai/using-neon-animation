@@ -16,7 +16,7 @@ class MainApp extends PolymerElement
   MainApp.created() : super.created() {
   }
 
-  int _index = 1;
+  int _index = -1;
 
   @reflectable
   bool computeType(index) {
