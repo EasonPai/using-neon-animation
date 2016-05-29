@@ -1,8 +1,8 @@
 /**
  */
 
-@HtmlImport("tiles_index.html")
-library using_neon_animation.lib.tiles.index;
+@HtmlImport("tiles-demo.html")
+library using_neon_animation.lib.tiles.demo;
 
 import 'package:polymer/polymer.dart';
 import 'package:web_components/web_components.dart' show HtmlImport;
@@ -12,17 +12,16 @@ import 'package:polymer_elements/iron_flex_layout.dart';
 import 'package:using_neon_animation/tiles/circles-page.dart';
 import 'package:using_neon_animation/tiles/squares-page.dart';
 
-@PolymerRegister('tiles-index')
-class TilesIndex extends PolymerElement
+@PolymerRegister('tiles-demo')
+class TilesDemo extends PolymerElement
     with
         PolymerBase{
-  TilesIndex.created() : super.created() {
+  TilesDemo.created() : super.created() {
   }
 
   NeonAnimatedPages _pages;
 
   ready() {
-
     _pages = $['pages'];
   }
 

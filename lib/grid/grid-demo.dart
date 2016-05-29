@@ -1,21 +1,21 @@
 /**
  */
 
-@HtmlImport("grid_index.html")
-library using_neon_animation.lib.grid.index;
+@HtmlImport("grid-demo.html")
+library using_neon_animation.lib.grid.demo;
 
 import 'package:polymer/polymer.dart';
 import 'package:web_components/web_components.dart' show HtmlImport;
 import 'package:polymer_elements/neon_animated_pages.dart';
 import 'package:polymer_elements/iron_flex_layout.dart';
-import 'package:using_neon_animation/grid/grid_view.dart';
-import 'package:using_neon_animation/grid/card_view.dart';
+import 'package:using_neon_animation/grid/grid-view.dart';
+import 'package:using_neon_animation/grid/card-view.dart';
 
-@PolymerRegister('grid-index')
-class GridIndex extends PolymerElement
+@PolymerRegister('grid-demo')
+class GridDemo extends PolymerElement
     with
         PolymerBase{
-  GridIndex.created() : super.created() {
+  GridDemo.created() : super.created() {
   }
 
   NeonAnimatedPages _pages;

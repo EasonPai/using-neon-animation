@@ -1,11 +1,50 @@
 <dom-module id="main-app">
     <template>
         <style>
+            .menu {
+                position: absolute;
+                display: block;
+                top: 1%;
+                right: 1%;
+                cursor: pointer;
+                border:1px solid #2f0952;
+                padding:5px;
+                box-shadow:inset 0 1px 1px #EEE;
+                font-size: 14px;
+                color: #2f0952;
+                background-color: rgba(188, 199, 188, 0.42);
+                margin-bottom: 10px;
+            }
+
+            .invisible {
+                display: none;
+            }
+
+
         </style>
 
         <span id="demos">
-            <grid-index hidden$="[[computeType(0)]]"></grid-index>
-            <tiles-index hidden$="[[computeType(1)]]"></tiles-index>
+            <basic-demo></basic-demo>
+            <grid-demo></grid-demo>
+            <tiles-demo></tiles-demo>
+        </span>
+
+        <span class="menu">
+            <div class="horizontal-section-container">
+                <div>
+                    <h4>Sample demos</h4>
+                    <div class="horizontal-section">
+                        <div id="0" on-tap="onTapped">basic</div>
+                        <div id="1" on-tap="onTapped">declarative</div>
+                        <div id="2" on-tap="onTapped">dropdown</div>
+                        <div id="3" on-tap="onTapped">grid</div>
+                        <div id="4" on-tap="onTapped">list</div>
+                        <div id="5" on-tap="onTapped">load</div>
+                        <div id="6" on-tap="onTapped">tiles</div>
+                        <div id="7" on-tap="onTapped">card</div>
+                    </div>
+                </div>
+            </div>
         </span>
 
 

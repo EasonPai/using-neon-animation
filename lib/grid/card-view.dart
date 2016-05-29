@@ -1,7 +1,7 @@
 /**
  */
 
-@HtmlImport("card_view.html")
+@HtmlImport("card-view.html")
 library using_neon_animation.lib.card_view;
 
 import 'package:polymer/polymer.dart';
