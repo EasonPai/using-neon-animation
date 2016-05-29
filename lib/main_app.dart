@@ -7,8 +7,10 @@ library using_neon_animation.lib.main_app;
 import 'package:polymer/polymer.dart';
 import 'package:web_components/web_components.dart' show HtmlImport;
 import 'package:using_neon_animation/basic/basic-demo.dart';
+import 'package:using_neon_animation/declarative/declarative-demo.dart';
 import 'package:using_neon_animation/grid/grid-demo.dart';
 import 'package:using_neon_animation/tiles/tiles-demo.dart';
+import 'package:using_neon_animation/card/card-demo.dart';
 import 'dart:html';
 
 @PolymerRegister('main-app')
