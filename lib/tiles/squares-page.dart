@@ -36,13 +36,13 @@ class SquaresPage extends PolymerElement
 
     animationConfig = {
       'entry': [
-//        {'name': 'hero-animation', 'id': 'hero', 'toPage': this},
-//        {
-//          'name': 'cascaded-animation',
-//          'animation': 'transform-animation',
-//          'transformFrom': 'translateY(60vh)',
-//          'nodes': squaresArray
-//        },
+        {'name': 'hero-animation', 'id': 'hero', 'toPage': this},
+        {
+          'name': 'cascaded-animation',
+          'animation': 'transform-animation',
+          'transformFrom': 'translateY(60vh)',
+          'nodes': squaresArray
+        },
         {
           'name': 'fade-in-animation',
           'nodes': squaresArray,

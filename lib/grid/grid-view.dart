@@ -1,4 +1,4 @@
-@HtmlImport("grid-view..html")
+@HtmlImport("grid-view.html")
 library using_neon_animation.lib.grid_view;
 
 import 'package:polymer/polymer.dart';
