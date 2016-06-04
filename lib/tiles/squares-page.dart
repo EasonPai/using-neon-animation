@@ -45,8 +45,8 @@ class SquaresPage extends PolymerElement
         },
         {
           'name': 'fade-in-animation',
-          'nodes': squaresArray,
-          'timing': {'delay': 250}
+          'nodes': squaresArray
+//          'timing': {'delay': 250}
         }
       ],
       'exit': [

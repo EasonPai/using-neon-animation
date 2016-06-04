@@ -20,32 +20,37 @@
                 display: none;
             }
 
+            .horizontal-section {
+
+            }
+
 
         </style>
 
         <span id="demos">
             <basic-demo></basic-demo>
             <declarative-demo></declarative-demo>
+            <div></div>
             <grid-demo></grid-demo>
+            <div></div>
+            <load-demo></load-demo>
             <tiles-demo></tiles-demo>
             <card-demo></card-demo>
         </span>
 
         <span class="menu">
             <div class="horizontal-section-container">
-                <div>
-                    <h4>Sample demos</h4>
-                    <div class="horizontal-section">
-                        <div id="0" on-tap="onTapped">basic</div>
-                        <div id="1" on-tap="onTapped">declarative</div>
-                        <!--<div id="2" on-tap="onTapped">dropdown</div>-->
-                        <div id="2" on-tap="onTapped">grid</div>
-                        <!--<div id="4" on-tap="onTapped">list</div>-->
-                        <!--<div id="5" on-tap="onTapped">load</div>-->
-                        <div id="3" on-tap="onTapped">tiles</div>
-                        <div id="4" on-tap="onTapped">card</div>
-                    </div>
-                </div>
+                <h5 on-tap="onMenuTapped">Sample demos</h5>
+                <iron-collapse class="horizontal-section">
+                    <div id="0" on-tap="onTapped">basic</div>
+                    <div id="1" on-tap="onTapped">declarative</div>
+                    <div id="2" on-tap="onTapped">dropdown</div>
+                    <div id="3" on-tap="onTapped">grid</div>
+                    <div id="4" on-tap="onTapped">list</div>
+                    <div id="5" on-tap="onTapped">load</div>
+                    <div id="6" on-tap="onTapped">tiles</div>
+                    <div id="7" on-tap="onTapped">card</div>
+                </iron-collapse>
             </div>
         </span>
 

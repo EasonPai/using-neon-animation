@@ -11,31 +11,49 @@ import 'package:using_neon_animation/declarative/declarative-demo.dart';
 import 'package:using_neon_animation/grid/grid-demo.dart';
 import 'package:using_neon_animation/tiles/tiles-demo.dart';
 import 'package:using_neon_animation/card/card-demo.dart';
+import 'package:using_neon_animation/load/load-demo.dart';
+import 'package:polymer_elements/iron_collapse.dart';
 import 'dart:html';
+import 'package:using_neon_animation/load/full-page.dart';
 
 @PolymerRegister('main-app')
 class MainApp extends PolymerElement with PolymerBase {
 
-  Element demos;
+  Element demoContainer;
   int _index = 0;
+  IronCollapse menu;
 
   MainApp.created() : super.created() {
-    demos = $['demos'];
-    toggleMenu();
+    demoContainer = $['demos'];
+    menu = $$('.horizontal-section');
+    toggleDemo();
+  }
+
+  @reflectable
+  void onMenuTapped(Event event, [_]) {
+    menu.toggle();
   }
 
   @reflectable
   void onTapped(Event event, [_]) {
     _index = int.parse(event.currentTarget.id);
-    toggleMenu();
+    toggleDemo();
   }
 
-  void toggleMenu() {
-    for (int i = 0; i < demos.children.length; i++) {
+  void toggleDemo() {
+    for (int i = 0; i < demoContainer.children.length; i++) {
       if (_index == i) {
-        demos.children[i].classes.remove("invisible");
+        demoContainer.children[i].classes.remove("invisible");
+
+        // special rule for 'load-demo'
+        if( _index == 5){
+
+          // pardon me for using this hack-around
+          (Polymer.dom(demoContainer.children[i].root).querySelector('full-page') as FullPage).show();
+        }
+
       } else {
-        demos.children[i].classes.add("invisible");
+        demoContainer.children[i].classes.add("invisible");
       }
     }
   }
