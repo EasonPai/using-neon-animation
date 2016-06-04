@@ -11040,6 +11040,596 @@ animations to be run when switching to or switching out of the page.
 
 
 
+
+<!--
+`<transform-animation>` animates a custom transform on an element. Use this to animate multiple
+transform properties, or to apply a custom transform value.
+
+Configuration:
+```
+{
+  name: 'transform-animation',
+  node: <node>,
+  transformOrigin: <transform-origin>,
+  transformFrom: <transform-from-string>,
+  transformTo: <transform-to-string>,
+  timing: <animation-timing>
+}
+```
+-->
+
+<script>
+
+  Polymer({
+
+    is: 'transform-animation',
+
+    behaviors: [
+      Polymer.NeonAnimationBehavior
+    ],
+
+    /**
+     * @param {{
+     *   node: !Element,
+     *   transformOrigin: (string|undefined),
+     *   transformFrom: (string|undefined),
+     *   transformTo: (string|undefined),
+     *   timing: (Object|undefined)
+     * }} config
+     */
+    configure: function(config) {
+      var node = config.node;
+      var transformFrom = config.transformFrom || 'none';
+      var transformTo = config.transformTo || 'none';
+
+      if (config.transformOrigin) {
+        this.setPrefixedProperty(node, 'transformOrigin', config.transformOrigin);
+      }
+
+      this._effect = new KeyframeEffect(node, [
+        {'transform': transformFrom},
+        {'transform': transformTo}
+      ], this.timingFromConfig(config));
+
+      return this._effect;
+    }
+
+  });
+
+</script>
+
+
+
+
+
+
+
+<!--
+`<scale-down-animation>` animates the scale transform of an element from 1 to 0. By default it
+scales in both the x and y axes.
+
+Configuration:
+```
+{
+  name: 'scale-down-animation',
+  node: <node>,
+  axis: 'x' | 'y' | '',
+  transformOrigin: <transform-origin>,
+  timing: <animation-timing>
+}
+```
+-->
+
+<script>
+
+  Polymer({
+
+    is: 'scale-down-animation',
+
+    behaviors: [
+      Polymer.NeonAnimationBehavior
+    ],
+
+    configure: function(config) {
+      var node = config.node;
+
+      if (config.transformOrigin) {
+        this.setPrefixedProperty(node, 'transformOrigin', config.transformOrigin);
+      }
+
+      var scaleProperty = 'scale(0, 0)';
+      if (config.axis === 'x') {
+        scaleProperty = 'scale(0, 1)';
+      } else if (config.axis === 'y') {
+        scaleProperty = 'scale(1, 0)';
+      }
+
+      this._effect = new KeyframeEffect(node, [
+        {'transform': 'scale(1,1)'},
+        {'transform': scaleProperty}
+      ], this.timingFromConfig(config));
+
+      return this._effect;
+    }
+
+  });
+
+</script>
+
+
+
+
+
+
+
+<!--
+`<slide-down-animation>` animates the transform of an element from `translateY(-100%)` to `none`.
+The `transformOrigin` defaults to `50% 0`.
+
+Configuration:
+```
+{
+  name: 'slide-down-animation',
+  node: <node>,
+  transformOrigin: <transform-origin>,
+  timing: <animation-timing>
+}
+```
+-->
+
+<script>
+
+  Polymer({
+
+    is: 'slide-down-animation',
+
+    behaviors: [
+      Polymer.NeonAnimationBehavior
+    ],
+
+    configure: function(config) {
+      var node = config.node;
+
+      if (config.transformOrigin) {
+        this.setPrefixedProperty(node, 'transformOrigin', config.transformOrigin);
+      } else {
+        this.setPrefixedProperty(node, 'transformOrigin', '50% 0');
+      }
+
+      this._effect = new KeyframeEffect(node, [
+        {'transform': 'translateY(-100%)'},
+        {'transform': 'none'}
+      ], this.timingFromConfig(config));
+
+      return this._effect;
+    }
+
+  });
+
+</script>
+
+
+
+<dom-module id="my-animatable">
+    <template>
+        <style>
+            :host {
+                display: inline-block;
+                border-radius: 50%;
+                width: 300px;
+                height: 300px;
+                background: orange;
+            }
+        </style>
+        <content></content>
+
+    </template>
+</dom-module>
+
+
+
+<!--
+`<scale-up-animation>` animates the scale transform of an element from 0 to 1. By default it
+scales in both the x and y axes.
+
+Configuration:
+```
+{
+  name: 'scale-up-animation',
+  node: <node>,
+  axis: 'x' | 'y' | '',
+  transformOrigin: <transform-origin>,
+  timing: <animation-timing>
+}
+```
+-->
+
+<script>
+
+  Polymer({
+
+    is: 'scale-up-animation',
+
+    behaviors: [
+      Polymer.NeonAnimationBehavior
+    ],
+
+    configure: function(config) {
+      var node = config.node;
+
+      if (config.transformOrigin) {
+        this.setPrefixedProperty(node, 'transformOrigin', config.transformOrigin);
+      }
+
+      var scaleProperty = 'scale(0)';
+      if (config.axis === 'x') {
+        scaleProperty = 'scale(0, 1)';
+      } else if (config.axis === 'y') {
+        scaleProperty = 'scale(1, 0)';
+      }
+
+      this._effect = new KeyframeEffect(node, [
+        {'transform': scaleProperty},
+        {'transform': 'scale(1, 1)'}
+      ], this.timingFromConfig(config));
+
+      return this._effect;
+    }
+
+  });
+
+</script>
+
+
+
+
+
+
+
+<!--
+`<fade-out-animation>` animates the opacity of an element from 1 to 0.
+
+Configuration:
+```
+{
+  name: 'fade-out-animation',
+  node: <node>
+  timing: <animation-timing>
+}
+```
+-->
+
+<script>
+
+  Polymer({
+
+    is: 'fade-out-animation',
+
+    behaviors: [
+      Polymer.NeonAnimationBehavior
+    ],
+
+    configure: function(config) {
+      var node = config.node;
+      this._effect = new KeyframeEffect(node, [
+        {'opacity': '1'},
+        {'opacity': '0'}
+      ], this.timingFromConfig(config));
+      return this._effect;
+    }
+
+  });
+
+</script>
+
+
+
+<dom-module id="my-dialog">
+    <template>
+        <style>
+            :host {
+                display: none;
+                padding: 16px;
+                background: white;
+                color: black;
+                margin: 0 auto;
+                z-index: 100;
+                position: absolute;
+                @apply(--shadow-elevation-2dp);
+            }
+        </style>
+        <content></content>
+
+    </template>
+</dom-module><dom-module id="basic-demo">
+    <template>
+
+        <style>
+            my-animatable {
+                margin-top: 50px;
+            }
+        </style>
+
+        <button on-click="onCircleButtonClick">toggle circle</button>
+        <button on-click="onDialogButtonClick">toggle dialog</button>
+
+        <div style="text-align: center">
+            <my-dialog>Hello World!</my-dialog>
+        </div>
+
+        <my-animatable></my-animatable>
+
+    </template>
+</dom-module>
+
+
+
+<!--
+`<slide-from-left-animation>` animates the transform of an element from
+`translateX(-100%)` to `none`.
+The `transformOrigin` defaults to `0 50%`.
+
+Configuration:
+```
+{
+  name: 'slide-from-left-animation',
+  node: <node>,
+  transformOrigin: <transform-origin>,
+  timing: <animation-timing>
+}
+```
+-->
+
+<script>
+
+  Polymer({
+
+    is: 'slide-from-left-animation',
+
+    behaviors: [
+      Polymer.NeonAnimationBehavior
+    ],
+
+    configure: function(config) {
+      var node = config.node;
+
+      if (config.transformOrigin) {
+        this.setPrefixedProperty(node, 'transformOrigin', config.transformOrigin);
+      } else {
+        this.setPrefixedProperty(node, 'transformOrigin', '0 50%');
+      }
+
+      this._effect = new KeyframeEffect(node, [
+        {'transform': 'translateX(-100%)'},
+        {'transform': 'none'}
+      ], this.timingFromConfig(config));
+
+      return this._effect;
+    }
+
+  });
+
+</script>
+
+
+
+
+
+
+
+<!--
+`<slide-from-right-animation>` animates the transform of an element from
+`translateX(100%)` to `none`.
+The `transformOrigin` defaults to `0 50%`.
+
+Configuration:
+```
+{
+  name: 'slide-from-right-animation',
+  node: <node>,
+  transformOrigin: <transform-origin>,
+  timing: <animation-timing>
+}
+```
+-->
+
+<script>
+
+  Polymer({
+
+    is: 'slide-from-right-animation',
+
+    behaviors: [
+      Polymer.NeonAnimationBehavior
+    ],
+
+    configure: function(config) {
+      var node = config.node;
+
+      if (config.transformOrigin) {
+        this.setPrefixedProperty(node, 'transformOrigin', config.transformOrigin);
+      } else {
+        this.setPrefixedProperty(node, 'transformOrigin', '0 50%');
+      }
+
+      this._effect = new KeyframeEffect(node, [
+        {'transform': 'translateX(100%)'},
+        {'transform': 'none'}
+      ], this.timingFromConfig(config));
+
+      return this._effect;
+    }
+
+  });
+
+</script>
+
+
+
+
+
+
+
+<!--
+`<slide-right-animation>` animates the transform of an element from `none` to `translateX(100%)`.
+The `transformOrigin` defaults to `0 50%`.
+
+Configuration:
+```
+{
+  name: 'slide-right-animation',
+  node: <node>,
+  transformOrigin: <transform-origin>,
+  timing: <animation-timing>
+}
+```
+-->
+
+<script>
+
+  Polymer({
+
+    is: 'slide-right-animation',
+
+    behaviors: [
+      Polymer.NeonAnimationBehavior
+    ],
+
+    configure: function(config) {
+      var node = config.node;
+
+      if (config.transformOrigin) {
+        this.setPrefixedProperty(node, 'transformOrigin', config.transformOrigin);
+      } else {
+        this.setPrefixedProperty(node, 'transformOrigin', '0 50%');
+      }
+
+      this._effect = new KeyframeEffect(node, [
+        {'transform': 'none'},
+        {'transform': 'translateX(100%)'}
+      ], this.timingFromConfig(config));
+
+      return this._effect;
+    }
+
+  });
+
+</script>
+
+
+
+
+
+
+
+<!--
+`<slide-left-animation>` animates the transform of an element from `none` to `translateX(-100%)`.
+The `transformOrigin` defaults to `0 50%`.
+
+Configuration:
+```
+{
+  name: 'slide-left-animation',
+  node: <node>,
+  transformOrigin: <transform-origin>,
+  timing: <animation-timing>
+}
+```
+-->
+
+<script>
+
+  Polymer({
+
+    is: 'slide-left-animation',
+
+    behaviors: [
+      Polymer.NeonAnimationBehavior
+    ],
+
+    configure: function(config) {
+      var node = config.node;
+
+      if (config.transformOrigin) {
+        this.setPrefixedProperty(node, 'transformOrigin', config.transformOrigin);
+      } else {
+        this.setPrefixedProperty(node, 'transformOrigin', '0 50%');
+      }
+
+      this._effect = new KeyframeEffect(node, [
+        {'transform': 'none'},
+        {'transform': 'translateX(-100%)'}
+      ], this.timingFromConfig(config));
+
+      return this._effect;
+    }
+
+  });
+
+</script>
+
+
+
+<dom-module id="declarative-demo">
+    <template>
+
+        <style>
+            :host {
+                overflow: hidden;
+                @apply(--layout-fullbleed);
+                @apply(--layout-vertical);
+            }
+            .toolbar {
+                position: relative;
+                padding: 8px;
+                background-color: white;
+                z-index: 12;
+            }
+            neon-animated-pages {
+            @apply(--layout-flex);
+            }
+            neon-animatable {
+                color: white;
+            @apply(--layout-horizontal);
+            @apply(--layout-center-center);
+            @apply(--paper-font-display4);
+            }
+            neon-animatable:nth-child(1) {
+                background: var(--paper-red-500);
+            }
+            neon-animatable:nth-child(2) {
+                background: var(--paper-blue-500);
+            }
+            neon-animatable:nth-child(3) {
+                background: var(--paper-orange-500);
+            }
+            neon-animatable:nth-child(4) {
+                background: var(--paper-green-500);
+            }
+            neon-animatable:nth-child(5) {
+                background: var(--paper-purple-500);
+            }
+        </style>
+
+        <div class="toolbar">
+            <button on-click="onPrevClick">⇦</button>
+            <button on-click="onNextClick">⇨</button>
+            <button on-click="onUpClick">⇧</button>
+            <button on-click="onDownClick">⇩</button>
+        </div>
+
+        <neon-animated-pages id="pages" selected="[[selected]]" entry-animation="[[entryAnimation]]" exit-animation="[[exitAnimation]]">
+            <neon-animatable>1</neon-animatable>
+            <neon-animatable>2</neon-animatable>
+            <neon-animatable>3</neon-animatable>
+            <neon-animatable>4</neon-animatable>
+            <neon-animatable>5</neon-animatable>
+        </neon-animated-pages>
+
+    </template>
+</dom-module>
+
+
 <script>
 
   /**
@@ -11388,111 +11978,6 @@ Configuration:
         </div>
     </template>
 </dom-module>
-
-
-
-<!--
-`<fade-out-animation>` animates the opacity of an element from 1 to 0.
-
-Configuration:
-```
-{
-  name: 'fade-out-animation',
-  node: <node>
-  timing: <animation-timing>
-}
-```
--->
-
-<script>
-
-  Polymer({
-
-    is: 'fade-out-animation',
-
-    behaviors: [
-      Polymer.NeonAnimationBehavior
-    ],
-
-    configure: function(config) {
-      var node = config.node;
-      this._effect = new KeyframeEffect(node, [
-        {'opacity': '1'},
-        {'opacity': '0'}
-      ], this.timingFromConfig(config));
-      return this._effect;
-    }
-
-  });
-
-</script>
-
-
-
-
-
-
-
-<!--
-`<transform-animation>` animates a custom transform on an element. Use this to animate multiple
-transform properties, or to apply a custom transform value.
-
-Configuration:
-```
-{
-  name: 'transform-animation',
-  node: <node>,
-  transformOrigin: <transform-origin>,
-  transformFrom: <transform-from-string>,
-  transformTo: <transform-to-string>,
-  timing: <animation-timing>
-}
-```
--->
-
-<script>
-
-  Polymer({
-
-    is: 'transform-animation',
-
-    behaviors: [
-      Polymer.NeonAnimationBehavior
-    ],
-
-    /**
-     * @param {{
-     *   node: !Element,
-     *   transformOrigin: (string|undefined),
-     *   transformFrom: (string|undefined),
-     *   transformTo: (string|undefined),
-     *   timing: (Object|undefined)
-     * }} config
-     */
-    configure: function(config) {
-      var node = config.node;
-      var transformFrom = config.transformFrom || 'none';
-      var transformTo = config.transformTo || 'none';
-
-      if (config.transformOrigin) {
-        this.setPrefixedProperty(node, 'transformOrigin', config.transformOrigin);
-      }
-
-      this._effect = new KeyframeEffect(node, [
-        {'transform': transformFrom},
-        {'transform': transformTo}
-      ], this.timingFromConfig(config));
-
-      return this._effect;
-    }
-
-  });
-
-</script>
-
-
-
-
 <dom-module id="card-view">
     <template>
         <style include="shared-styles"></style>
@@ -11520,7 +12005,7 @@ Configuration:
 
     </template>
 
-    </dom-module><dom-module id="main-app">
+    </dom-module><dom-module id="grid-demo">
     <template>
         <style>
             :host {
@@ -11535,6 +12020,881 @@ Configuration:
             <grid-view id="grid" on-tile-click="onTileClick"></grid-view>
             <card-view id="card" on-click="onCardClosed"> </card-view>
         </neon-animated-pages>
+    </template>
+</dom-module>
+
+
+
+<!--
+`<cascaded-animation>` applies an animation on an array of elements with a delay between each.
+the delay defaults to 50ms.
+
+Configuration:
+```
+{
+  name: 'cascaded-animation',
+  animation: <animation-name>,
+  nodes: <array-of-nodes>,
+  nodedelay: <node-delay-in-ms>,
+  timing: <animation-timing>
+}
+```
+-->
+
+<script>
+
+  Polymer({
+
+    is: 'cascaded-animation',
+
+    behaviors: [
+      Polymer.NeonAnimationBehavior
+    ],
+
+    properties: {
+
+      /** @type {!Polymer.IronMeta} */
+      _animationMeta: {
+        type: Object,
+        value: function() {
+          return new Polymer.IronMeta({type: 'animation'});
+        }
+      }
+
+    },
+
+    /**
+     * @param {{
+     *   animation: string,
+     *   nodes: !Array<!Element>,
+     *   nodeDelay: (number|undefined),
+     *   timing: (Object|undefined)
+     *  }} config
+     */
+    configure: function(config) {
+      var animationConstructor = /** @type {Function} */ (
+          this._animationMeta.byKey(config.animation));
+      if (!animationConstructor) {
+        console.warn(this.is + ':', 'constructor for', config.animation, 'not found!');
+        return;
+      }
+
+      this._animations = [];
+      var nodes = config.nodes;
+      var effects = [];
+      var nodeDelay = config.nodeDelay || 50;
+
+      config.timing = config.timing || {};
+      config.timing.delay = config.timing.delay || 0;
+
+      var oldDelay = config.timing.delay;
+      for (var node, index = 0; node = nodes[index]; index++) {
+        config.timing.delay += nodeDelay;
+        config.node = node;
+
+        var animation = new animationConstructor();
+        var effect = animation.configure(config);
+
+        this._animations.push(animation);
+        effects.push(effect);
+      }
+      config.timing.delay = oldDelay;
+
+      this._effect = new GroupEffect(effects);
+      return this._effect;
+    },
+
+    complete: function() {
+      for (var animation, index = 0; animation = this._animations[index]; index++) {
+        animation.complete(animation.config);
+      }
+    }
+
+  });
+
+</script>
+
+
+
+<dom-module id="circles-page">
+    <template>
+        <style>
+            :host {
+                @apply(--layout-horizontal);
+                @apply(--layout-center-center);
+            }
+
+            .circle {
+                display: inline-block;
+                box-sizing: border-box;
+                width: 100px;
+                height: 100px;
+                margin: 16px;
+                border-radius: 50%;
+                background: var(--color-one);
+            }
+        </style>
+
+        <div>
+            <div class="circle" on-tap="onTapped"></div>
+            <div class="circle" on-tap="onTapped"></div>
+            <div class="circle" on-tap="onTapped"></div>
+            <div class="circle" on-tap="onTapped"></div>
+        </div>
+
+    </template>
+
+</dom-module>
+
+
+
+<!--
+`<slide-up-animation>` animates the transform of an element from `translateY(0)` to
+`translateY(-100%)`. The `transformOrigin` defaults to `50% 0`.
+
+Configuration:
+```
+{
+  name: 'slide-up-animation',
+  node: <node>,
+  transformOrigin: <transform-origin>,
+  timing: <animation-timing>
+}
+```
+-->
+
+<script>
+
+  Polymer({
+
+    is: 'slide-up-animation',
+
+    behaviors: [
+      Polymer.NeonAnimationBehavior
+    ],
+
+    configure: function(config) {
+      var node = config.node;
+
+      if (config.transformOrigin) {
+        this.setPrefixedProperty(node, 'transformOrigin', config.transformOrigin);
+      } else {
+        this.setPrefixedProperty(node, 'transformOrigin', '50% 0');
+      }
+
+      this._effect = new KeyframeEffect(node, [
+        {'transform': 'translate(0)'},
+        {'transform': 'translateY(-100%)'}
+      ], this.timingFromConfig(config));
+
+      return this._effect;
+    }
+
+  });
+
+</script>
+
+
+
+
+
+
+
+<!--
+`<fade-in-animation>` animates the opacity of an element from 0 to 1.
+
+Configuration:
+```
+{
+  name: 'fade-in-animation',
+  node: <node>
+  timing: <animation-timing>
+}
+```
+-->
+
+<script>
+
+  Polymer({
+
+    is: 'fade-in-animation',
+
+    behaviors: [
+      Polymer.NeonAnimationBehavior
+    ],
+
+    configure: function(config) {
+      var node = config.node;
+      this._effect = new KeyframeEffect(node, [
+        {'opacity': '0'},
+        {'opacity': '1'}
+      ], this.timingFromConfig(config));
+      return this._effect;
+    }
+
+  });
+
+</script>
+
+
+
+<dom-module id="squares-page">
+    <template>
+        <style>
+
+            .header {
+                height: 40%;
+                background: var(--color-one);
+            }
+
+            .body {
+                text-align: center;
+                padding: 8px;
+            }
+
+            .square {
+                display: inline-block;
+                width: 150px;
+                height: 150px;
+                margin: 8px;
+                background: var(--color-two);
+            }
+
+        </style>
+
+        <div id="header" class="header"></div>
+
+        <div class="body">
+            <div class="square"></div>
+            <div class="square"></div>
+            <div class="square"></div>
+            <div class="square"></div>
+        </div>
+
+    </template>
+
+</dom-module><dom-module id="tiles-demo">
+    <template>
+        <style>
+            :host {
+                overflow: hidden;
+            }
+            neon-animated-pages {
+                height: 100%;
+            }
+            :root {
+                --color-one: var(--paper-cyan-300);
+                --color-two: var(--paper-orange-500);
+            }
+
+        </style>
+        <neon-animated-pages id="pages" selected="0">
+            <circles-page id="circles" on-circle-click="onCircleClick"></circles-page>
+            <squares-page on-click="onSquareClick"></squares-page>
+        </neon-animated-pages>
+    </template>
+</dom-module>
+
+
+
+<!--
+`<reverse-ripple-animation>` scales and transform an element such that it appears to ripple down from this element, to either
+a shared element, or a screen position.
+
+If using as a shared element animation in `<neon-animated-pages>`, use this animation in an `exit`
+animation in the source page and in an `entry` animation in the destination page. Also, define the
+reverse-ripple elements in the `sharedElements` property (not a configuration property, see
+`Polymer.NeonSharedElementAnimatableBehavior`).
+If using a screen position, define the `gesture` property.
+Configuration:
+```
+{
+  name: 'reverse-ripple-animation`.
+  id: <shared-element-id>, /* set this or gesture */
+  gesture: {x: <page-x>, y: <page-y>}, /* set this or id */
+  timing: <animation-timing>,
+  toPage: <node>, /* define for the destination page */
+  fromPage: <node>, /* define for the source page */
+}
+```
+-->
+
+<script>
+  Polymer({
+    is: 'reverse-ripple-animation',
+
+    behaviors: [
+      Polymer.NeonSharedElementAnimationBehavior
+    ],
+
+    configure: function(config) {
+      var shared = this.findSharedElements(config);
+      if (!shared) {
+        return null;
+      }
+
+      var translateX, translateY;
+      var fromRect = shared.from.getBoundingClientRect();
+      if (config.gesture) {
+        translateX = config.gesture.x - (fromRect.left + (fromRect.width / 2));
+        translateY = config.gesture.y - (fromRect.top + (fromRect.height / 2));
+      } else {
+        var toRect = shared.to.getBoundingClientRect();
+        translateX = (toRect.left + (toRect.width / 2)) - (fromRect.left + (fromRect.width / 2));
+        translateY = (toRect.top + (toRect.height / 2)) - (fromRect.top + (fromRect.height / 2));
+      }
+      var translate = 'translate(' + translateX + 'px,' + translateY + 'px)';
+
+      var size = Math.max(fromRect.width + Math.abs(translateX) * 2, fromRect.height + Math.abs(translateY) * 2);
+      var diameter = Math.sqrt(2 * size * size);
+      var scaleX = diameter / fromRect.width;
+      var scaleY = diameter / fromRect.height;
+      var scale = 'scale(' + scaleX + ',' + scaleY + ')';
+
+      this.setPrefixedProperty(shared.from, 'transformOrigin', '50% 50%');
+      shared.from.style.borderRadius = '50%';
+
+      this._effect = new KeyframeEffect(shared.from, [
+        {'transform': translate + ' ' + scale},
+        {'transform': translate + ' scale(0)'}
+      ], this.timingFromConfig(config));
+      return this._effect;
+    },
+
+    complete: function() {
+      if (this.sharedElements) {
+        this.setPrefixedProperty(this.sharedElements.from, 'transformOrigin', '');
+        this.sharedElements.from.style.borderRadius = '';
+      }
+    }
+  });
+</script>
+
+
+
+<dom-module id="x-cards-list">
+    <template>
+        <style>
+            :host {
+                display: block;
+                overflow: hidden;
+            }
+            #placeholder {
+                opacity: 0;
+                background-color: grey;
+                @apply(--layout-fit);
+            }
+        </style>
+
+        <div id="placeholder"></div>
+        <div id="container">
+            <content select="div"></content>
+        </div>
+
+    </template>
+</dom-module><dom-module id="x-card">
+    <template>
+        <style>
+            :host {
+                display: block;
+                overflow: hidden;
+            }
+            #placeholder {
+                opacity: 0;
+                background-color: grey;
+                @apply(--layout-fit);
+            }
+
+        </style>
+
+        <div id="placeholder"></div>
+        <div id="container">
+            <content select="div"></content>
+        </div>
+
+    </template>
+</dom-module><dom-module id="card-demo">
+    <template>
+
+        <style>
+            :host {
+                padding: 15px;
+                @apply(--layout-fullbleed);
+                @apply(--paper-font-common-base);
+            }
+            neon-animated-pages {
+                height: 100%;
+            }
+            .large {
+                width: 100%
+            }
+            .button {
+                text-align: center;
+                width: 120px;
+                height: 32px;
+                line-height: 32px;
+                border-radius: 2px;
+                font-size: 0.9em;
+                background-color: #fff;
+                color: #646464;
+            }
+            .button.blue {
+                background-color: #4285f4;
+                color: #fff;
+            }
+            .button.raised {
+                box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.26);
+            }
+            .button.back {
+                position: fixed;
+                top: 30px;
+                left: 30px;
+            }
+            .card-contents {
+                @apply(--layout-vertical);
+                @apply(--layout-center-center);
+                @apply(--layout-fit);
+            }
+            .button-container {
+                @apply(--layout-flex);
+                @apply(--layout-horizontal);
+                @apply(--layout-around-justified);
+            }
+        </style>
+
+        <neon-animated-pages id="pages" selected="0">
+            <x-cards-list id="list">
+                <div class="card-contents">
+                    <h2>Choose a subject</h2>
+                    <div class="button-container large">
+                        <div class="blue raised button" on-click="onPolymerClick">
+                            POLYMER
+                        </div>
+                        <div class="blue raised button" on-click="onAngularClick">
+                            ANGULAR
+                        </div>
+                    </div>
+                </div>
+            </x-cards-list>
+
+            <x-card>
+                <div class="card-contents">
+                    <div class="raised back button" on-click="onBackClick">
+                        BACK
+                    </div>
+                    <h2>Polymer</h2>
+                    <p>
+                        Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+                        tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+                        quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+                        consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+                        cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+                        proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                    </p>
+                </div>
+            </x-card>
+
+            <x-card>
+                <div class="card-contents">
+                    <div class="raised back button" on-click="onBackClick">
+                        BACK
+                    </div>
+                    <h2>Angular</h2>
+                    <p>
+                        Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+                        tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+                        quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+                        consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+                        cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+                        proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                    </p>
+                </div>
+            </x-card>
+
+        </neon-animated-pages>
+
+    </template>
+</dom-module>
+<dom-module id="animated-grid">
+    <template>
+        <style include="shared-styles"></style>
+        <style>
+            :host {
+                display: block;
+                background: #000;
+            }
+            .tile {
+                display: inline-block;
+                float: left;
+                vertical-align: top;
+                width: calc(100% / 6);
+                height: calc(100% / 3);
+            @apply(--paper-font-title);
+            @apply(--layout-vertical);
+            @apply(--layout-center-center);
+            }
+            .tile:nth-of-type(1) {
+                width: calc(100% / 3);
+                height: calc(100% / 3 * 2);
+            }
+            .tile:nth-of-type(4) {
+                width: calc(100% / 3);
+            }
+            .tile:nth-of-type(5) {
+                width: calc(100% / 3);
+                height: calc(100% / 3 * 2);
+            }
+            .tile:nth-of-type(8) {
+                width: calc(100% / 3);
+                height: calc(100% / 3);
+            }
+            .tile:nth-of-type(9) {
+                position: absolute;
+                top: calc(100% / 3 * 2);
+                left: 0;
+                width: calc(100% / 6);
+                height: calc(100% / 3);
+            }
+            .tile:nth-of-type(10) {
+                position: absolute;
+                top: calc(100% / 3 * 2);
+                left: calc(100% / 6);;
+                width: calc(100% / 6);
+                height: calc(100% / 3);
+            }
+
+        </style>
+        <div class="layout flex">
+            <template is="dom-repeat" items="[[data]]" as="item">
+                <div class$="[[computeTileClass(item.color)]]">
+                    <span>[[item.value]]</span>
+                </div>
+            </template>
+        </div>
+    </template>
+</dom-module>
+<dom-module id="full-page">
+    <template>
+        <style>
+            :host {
+                background: black;
+                visibility: hidden;
+                @apply(--layout-vertical);
+            }
+            .toolbar {
+                background: #9c27b0;
+                height: 72px;
+                z-index: 1;
+                @apply(--shadow-elevation-2dp);
+            }
+            animated-grid {
+                height: calc(100% - 72px);
+                @apply(--layout-flex);
+            }
+        </style>
+
+        <div id="toolbar" class="toolbar"></div>
+        <animated-grid id="grid"></animated-grid>
+
+    </template>
+</dom-module><dom-module id="load-demo">
+    <template>
+
+        <style>
+            :host {
+                overflow: hidden;
+                @apply(--layout-fullbleed);
+            }
+
+            full-page {
+                @apply(--layout-fit);
+            }
+        </style>
+
+        <full-page></full-page>
+
+    </template>
+</dom-module>
+
+<!--
+`iron-collapse` creates a collapsible block of content.  By default, the content
+will be collapsed.  Use `opened` or `toggle()` to show/hide the content.
+
+    <button on-click="toggle">toggle collapse</button>
+
+    <iron-collapse id="collapse">
+      <div>Content goes here...</div>
+    </iron-collapse>
+
+    ...
+
+    toggle: function() {
+      this.$.collapse.toggle();
+    }
+
+`iron-collapse` adjusts the height/width of the collapsible element to show/hide
+the content.  So avoid putting padding/margin/border on the collapsible directly,
+and instead put a div inside and style that.
+
+    <style>
+      .collapse-content {
+        padding: 15px;
+        border: 1px solid #dedede;
+      }
+    </style>
+
+    <iron-collapse>
+      <div class="collapse-content">
+        <div>Content goes here...</div>
+      </div>
+    </iron-collapse>
+
+@group Iron Elements
+@hero hero.svg
+@demo demo/index.html
+@element iron-collapse
+-->
+
+<dom-module id="iron-collapse">
+
+  <style>
+
+    :host {
+      display: block;
+      transition-duration: 300ms;
+      overflow: auto;
+    }
+
+    :host(.iron-collapse-closed) {
+      display: none;
+    }
+
+  </style>
+
+  <template>
+
+    <content></content>
+
+  </template>
+
+</dom-module>
+
+<script>
+
+  Polymer({
+
+    is: 'iron-collapse',
+
+    properties: {
+
+      /**
+       * If true, the orientation is horizontal; otherwise is vertical.
+       *
+       * @attribute horizontal
+       */
+      horizontal: {
+        type: Boolean,
+        value: false,
+        observer: '_horizontalChanged'
+      },
+
+      /**
+       * Set opened to true to show the collapse element and to false to hide it.
+       *
+       * @attribute opened
+       */
+      opened: {
+        type: Boolean,
+        value: false,
+        notify: true,
+        observer: '_openedChanged'
+      },
+
+      /**
+       * Set noAnimation to true to disable animations
+       *
+       * @attribute noAnimation
+       */
+      noAnimation: {
+        type: Boolean
+      },
+
+    },
+
+    hostAttributes: {
+      role: 'group',
+      'aria-hidden': 'true',
+      'aria-expanded': 'false'
+    },
+
+    listeners: {
+      transitionend: '_transitionEnd'
+    },
+
+    attached: function() {
+      // It will take care of setting correct classes and styles.
+      this._transitionEnd();
+    },
+
+    /**
+     * Toggle the opened state.
+     *
+     * @method toggle
+     */
+    toggle: function() {
+      this.opened = !this.opened;
+    },
+
+    show: function() {
+      this.opened = true;
+    },
+
+    hide: function() {
+      this.opened = false;
+    },
+
+    updateSize: function(size, animated) {
+      // No change!
+      if (this.style[this.dimension] === size) {
+        return;
+      }
+
+      this._updateTransition(false);
+      // If we can animate, must do some prep work.
+      if (animated && !this.noAnimation) {
+        // Animation will start at the current size.
+        var startSize = this._calcSize();
+        // For `auto` we must calculate what is the final size for the animation.
+        // After the transition is done, _transitionEnd will set the size back to `auto`.
+        if (size === 'auto') {
+          this.style[this.dimension] = size;
+          size = this._calcSize();
+        }
+        // Go to startSize without animation.
+        this.style[this.dimension] = startSize;
+        // Force layout to ensure transition will go. Set offsetHeight to itself
+        // so that compilers won't remove it.
+        this.offsetHeight = this.offsetHeight;
+        // Enable animation.
+        this._updateTransition(true);
+      }
+      // Set the final size.
+      this.style[this.dimension] = size;
+    },
+
+    /**
+     * enableTransition() is deprecated, but left over so it doesn't break existing code.
+     * Please use `noAnimation` property instead.
+     *
+     * @method enableTransition
+     * @deprecated since version 1.0.4
+     */
+    enableTransition: function(enabled) {
+      console.warn('`enableTransition()` is deprecated, use `noAnimation` instead.');
+      this.noAnimation = !enabled;
+    },
+
+    _updateTransition: function(enabled) {
+      this.style.transitionDuration = (enabled && !this.noAnimation) ? '' : '0s';
+    },
+
+    _horizontalChanged: function() {
+      this.dimension = this.horizontal ? 'width' : 'height';
+      this.style.transitionProperty = this.dimension;
+    },
+
+    _openedChanged: function() {
+      this.setAttribute('aria-expanded', this.opened);
+      this.setAttribute('aria-hidden', !this.opened);
+
+      this.toggleClass('iron-collapse-closed', false);
+      this.toggleClass('iron-collapse-opened', false);
+      this.updateSize(this.opened ? 'auto' : '0px', true);
+
+      // Focus the current collapse.
+      if (this.opened) {
+        this.focus();
+      }
+      if (this.noAnimation) {
+        this._transitionEnd();
+      }
+    },
+
+    _transitionEnd: function() {
+      if (this.opened) {
+        this.style[this.dimension] = 'auto';
+      }
+      this.toggleClass('iron-collapse-closed', !this.opened);
+      this.toggleClass('iron-collapse-opened', this.opened);
+      this._updateTransition(false);
+    },
+
+    _calcSize: function() {
+      return this.getBoundingClientRect()[this.dimension] + 'px';
+    }
+
+  });
+
+</script>
+
+
+<dom-module id="main-app">
+    <template>
+        <style>
+            .menu {
+                position: absolute;
+                display: block;
+                top: 1%;
+                right: 1%;
+                cursor: pointer;
+                border:1px solid #2f0952;
+                padding:5px;
+                box-shadow:inset 0 1px 1px #EEE;
+                font-size: 14px;
+                color: #2f0952;
+                background-color: rgba(188, 199, 188, 0.42);
+                margin-bottom: 10px;
+            }
+
+            .invisible {
+                display: none;
+            }
+
+            .horizontal-section {
+
+            }
+
+
+        </style>
+
+        <span id="demos">
+            <basic-demo></basic-demo>
+            <declarative-demo></declarative-demo>
+            <div></div>
+            <grid-demo></grid-demo>
+            <div></div>
+            <load-demo></load-demo>
+            <tiles-demo></tiles-demo>
+            <card-demo></card-demo>
+        </span>
+
+        <span class="menu">
+            <div class="horizontal-section-container">
+                <h5 on-tap="onMenuTapped">Sample demos</h5>
+                <iron-collapse class="horizontal-section">
+                    <div id="0" on-tap="onTapped">basic</div>
+                    <div id="1" on-tap="onTapped">declarative</div>
+                    <div id="2" on-tap="onTapped">dropdown</div>
+                    <div id="3" on-tap="onTapped">grid</div>
+                    <div id="4" on-tap="onTapped">list</div>
+                    <div id="5" on-tap="onTapped">load</div>
+                    <div id="6" on-tap="onTapped">tiles</div>
+                    <div id="7" on-tap="onTapped">card</div>
+                </iron-collapse>
+            </div>
+        </span>
+
+
     </template>
 </dom-module><script defer="" type="application/dart" src="index.bootstrap.initialize.dart"></script><script defer="" src="packages/browser/dart.js"></script>
 

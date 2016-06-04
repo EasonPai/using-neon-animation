@@ -1,17 +1,59 @@
 <dom-module id="main-app">
     <template>
         <style>
-            :host {
-                overflow: hidden;
-            }
-            neon-animated-pages {
-                height: 100%;
+            .menu {
+                position: absolute;
+                display: block;
+                top: 1%;
+                right: 1%;
+                cursor: pointer;
+                border:1px solid #2f0952;
+                padding:5px;
+                box-shadow:inset 0 1px 1px #EEE;
+                font-size: 14px;
+                color: #2f0952;
+                background-color: rgba(188, 199, 188, 0.42);
+                margin-bottom: 10px;
             }
 
+            .invisible {
+                display: none;
+            }
+
+            .horizontal-section {
+
+            }
+
+
         </style>
-        <neon-animated-pages id="pages" selected="0">
-            <grid-view id="grid" on-tile-click="onTileClick"></grid-view>
-            <card-view id="card" on-click="onCardClosed"> </card-view>
-        </neon-animated-pages>
+
+        <span id="demos">
+            <basic-demo></basic-demo>
+            <declarative-demo></declarative-demo>
+            <div></div>
+            <grid-demo></grid-demo>
+            <div></div>
+            <load-demo></load-demo>
+            <tiles-demo></tiles-demo>
+            <card-demo></card-demo>
+        </span>
+
+        <span class="menu">
+            <div class="horizontal-section-container">
+                <h5 on-tap="onMenuTapped">Sample demos</h5>
+                <iron-collapse class="horizontal-section">
+                    <div id="0" on-tap="onTapped">basic</div>
+                    <div id="1" on-tap="onTapped">declarative</div>
+                    <div id="2" on-tap="onTapped">dropdown</div>
+                    <div id="3" on-tap="onTapped">grid</div>
+                    <div id="4" on-tap="onTapped">list</div>
+                    <div id="5" on-tap="onTapped">load</div>
+                    <div id="6" on-tap="onTapped">tiles</div>
+                    <div id="7" on-tap="onTapped">card</div>
+                </iron-collapse>
+            </div>
+        </span>
+
+
     </template>
 </dom-module>

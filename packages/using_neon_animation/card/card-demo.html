@@ -1,0 +1,102 @@
+<dom-module id="card-demo">
+    <template>
+
+        <style>
+            :host {
+                padding: 15px;
+                @apply(--layout-fullbleed);
+                @apply(--paper-font-common-base);
+            }
+            neon-animated-pages {
+                height: 100%;
+            }
+            .large {
+                width: 100%
+            }
+            .button {
+                text-align: center;
+                width: 120px;
+                height: 32px;
+                line-height: 32px;
+                border-radius: 2px;
+                font-size: 0.9em;
+                background-color: #fff;
+                color: #646464;
+            }
+            .button.blue {
+                background-color: #4285f4;
+                color: #fff;
+            }
+            .button.raised {
+                box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.26);
+            }
+            .button.back {
+                position: fixed;
+                top: 30px;
+                left: 30px;
+            }
+            .card-contents {
+                @apply(--layout-vertical);
+                @apply(--layout-center-center);
+                @apply(--layout-fit);
+            }
+            .button-container {
+                @apply(--layout-flex);
+                @apply(--layout-horizontal);
+                @apply(--layout-around-justified);
+            }
+        </style>
+
+        <neon-animated-pages id="pages" selected="0">
+            <x-cards-list id="list">
+                <div class="card-contents">
+                    <h2>Choose a subject</h2>
+                    <div class="button-container large">
+                        <div class="blue raised button" on-click="onPolymerClick">
+                            POLYMER
+                        </div>
+                        <div class="blue raised button" on-click="onAngularClick">
+                            ANGULAR
+                        </div>
+                    </div>
+                </div>
+            </x-cards-list>
+
+            <x-card>
+                <div class="card-contents">
+                    <div class="raised back button" on-click="onBackClick">
+                        BACK
+                    </div>
+                    <h2>Polymer</h2>
+                    <p>
+                        Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+                        tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+                        quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+                        consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+                        cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+                        proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                    </p>
+                </div>
+            </x-card>
+
+            <x-card>
+                <div class="card-contents">
+                    <div class="raised back button" on-click="onBackClick">
+                        BACK
+                    </div>
+                    <h2>Angular</h2>
+                    <p>
+                        Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+                        tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+                        quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+                        consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+                        cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+                        proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                    </p>
+                </div>
+            </x-card>
+
+        </neon-animated-pages>
+
+    </template>
+</dom-module>

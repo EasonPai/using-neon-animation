@@ -1,0 +1,29 @@
+<dom-module id="circles-page">
+    <template>
+        <style>
+            :host {
+                @apply(--layout-horizontal);
+                @apply(--layout-center-center);
+            }
+
+            .circle {
+                display: inline-block;
+                box-sizing: border-box;
+                width: 100px;
+                height: 100px;
+                margin: 16px;
+                border-radius: 50%;
+                background: var(--color-one);
+            }
+        </style>
+
+        <div>
+            <div class="circle" on-tap="onTapped"></div>
+            <div class="circle" on-tap="onTapped"></div>
+            <div class="circle" on-tap="onTapped"></div>
+            <div class="circle" on-tap="onTapped"></div>
+        </div>
+
+    </template>
+
+</dom-module>

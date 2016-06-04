@@ -1,0 +1,21 @@
+<dom-module id="tiles-demo">
+    <template>
+        <style>
+            :host {
+                overflow: hidden;
+            }
+            neon-animated-pages {
+                height: 100%;
+            }
+            :root {
+                --color-one: var(--paper-cyan-300);
+                --color-two: var(--paper-orange-500);
+            }
+
+        </style>
+        <neon-animated-pages id="pages" selected="0">
+            <circles-page id="circles" on-circle-click="onCircleClick"></circles-page>
+            <squares-page on-click="onSquareClick"></squares-page>
+        </neon-animated-pages>
+    </template>
+</dom-module>

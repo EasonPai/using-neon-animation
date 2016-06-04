@@ -1,0 +1,26 @@
+<link rel="import" href="../shared-styles.html">
+<dom-module id="full-page">
+    <template>
+        <style>
+            :host {
+                background: black;
+                visibility: hidden;
+                @apply(--layout-vertical);
+            }
+            .toolbar {
+                background: #9c27b0;
+                height: 72px;
+                z-index: 1;
+                @apply(--shadow-elevation-2dp);
+            }
+            animated-grid {
+                height: calc(100% - 72px);
+                @apply(--layout-flex);
+            }
+        </style>
+
+        <div id="toolbar" class="toolbar"></div>
+        <animated-grid id="grid"></animated-grid>
+
+    </template>
+</dom-module>
