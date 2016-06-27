@@ -1,0 +1,13 @@
+<dom-module id="dropdown-demo">
+    <template>
+        <style>
+            :host {
+                @apply(--layout-fit);
+            }
+        </style>
+        <button dropdown-id="dropdown" on-click="onButtonClick">dropdown</button>
+        <br>
+        <animated-dropdown id="dropdown" on-click="onDropdownClick">Hello world!</animated-dropdown>
+
+    </template>
+</dom-module>

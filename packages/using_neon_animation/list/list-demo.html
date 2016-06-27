@@ -1,0 +1,17 @@
+<dom-module id="list-demo">
+    <template>
+        <style>
+            :host {
+                display: block;
+                @apply(--layout-fit);
+            }
+            neon-animated-pages {
+                height: 100%;
+            }
+        </style>
+        <neon-animated-pages id="pages" selected="0">
+            <list-view data="[[fileData]]" on-item-click="onItemClick"></list-view>
+            <full-view on-close="onClose"></full-view>
+        </neon-animated-pages>
+    </template>
+</dom-module>
