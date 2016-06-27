@@ -35,6 +35,10 @@ class MyDialog extends PolymerElement
       }]
     };
 
+    on['neon-animation-finish'].listen((e){
+      print("listened finish event");
+    });
+
   }
 
   void show() {
