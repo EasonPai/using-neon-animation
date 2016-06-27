@@ -13,6 +13,7 @@ import 'package:using_neon_animation/tiles/tiles-demo.dart';
 import 'package:using_neon_animation/card/card-demo.dart';
 import 'package:using_neon_animation/load/load-demo.dart';
 import 'package:using_neon_animation/list/list-demo.dart';
+import 'package:using_neon_animation/dropdown/dropdown-demo.dart';
 import 'package:polymer_elements/iron_collapse.dart';
 import 'dart:html';
 import 'package:using_neon_animation/load/full-page.dart';
